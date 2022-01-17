@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-100">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liella! 5Lines Color Picker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!--FontAwesome-->
+  <!-- Javascript -->
+  <script type="text/javascript" src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/core.js"></script>
+  <script src="./js/iziModal.min.js"></script>
+  <script src="./js/tw_share.js"></script>
+
+  <!-- 通常時 -->
+  <!-- <script src="./js/index.js"></script> -->
+
+  <!-- 宮城公演のみ -->
+  <!-- <script src="./js/miyagi.js"></script> -->
+
+  <!-- 東京追加のみ -->
+  <script src="./js/ariake.js"></script>
+
+  <!-- 雪が降ります -->
+  <!-- <script src="./js/snowFall.js"></script>
+  <link rel="stylesheet" href="./css/snow.css"> -->
+
+  <link rel="stylesheet" href="./css/iziModal.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/snow.css">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@300&display=swap" rel="stylesheet">
+
+  <!-- 画像のプリロード(画像が重いときに使ってください) -->
+  <link rel="preload" href="./img/bg_img.png" as="image">
+  <link rel="preload" href="./img/error.png" as="image">
+  <link rel="preload" href="./img/logo.png" as="image">
+  <link rel="preload" href="./img/result_sample.png" as="image">
+  <link rel="preload" href="./img/ticket.png" as="image">
+
+  <!--Favicon設定-->
+  <link rel="icon" href="./img/favicon.ico">
+
+  <!--Share用設定 使い方は調べてください-->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="" /> 
+  <meta property="og:url" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="" /> <!--ページと同ドメインかつフルパスで-->
+  <meta property="og:type" content="article" />
+</head>
+
+<body class="d-flex flex-column h-100">
+  <!-- 雪降らせたいとき↓ -->
+  <!-- <div id="snow-container"></div> -->
+  <!-- 雪降らせたいとき↑ -->
+  <div class="flex-shrink-0 mb-3">
+    <article class="container">
+      <h2 class="text-light mt-3 fw-normal border-bottom border-3 border-grey rounded-3"><i class="fas fa-search"></i>
+        アプリタイトル
+      </h2>
+      <div class="mt-3">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h4 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Descriptions
+              </button>
+            </h4>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <h6 class="card-subtitle mb-2 text-muted">サブタイトル</h6>
+                <p class="card-text">
+                  文章が入ります。文章が入ります。文章が入ります。文章が入ります。文章が入ります。文章が入ります。
+                  <br> <span class="fw-bold border-bottom border-dark">太字、下線もできます。</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 東京追加公演用 -->
+      <div class="mt-3">
+        <div>
+          <select class="form-select form-select-lg mb-3" name="select_venue" id="select-venue" required>
+            <option value="" selected>会場を選択</option>
+            <option value="ariake">会場名</option>
+          </select>
+        </div>
+
+
+        <div id="input-seat">
+          <div class="row">
+            <div class="col-6" id="input-zone">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">ブロック</h4>
+                  <select class="form-select" name="select_lr" id="select-zone"></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6" id="input-number">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title text-center">番号</h4>
+                  <input type="number" class="form-control" placeholder="番号を入力" name="row" id="row-number" max=28 min=1>
+                  <div id="numberTips" class="form-text text-danger d-none">
+                    何らかのバリデーション警告を出したい場合
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3 mb-3">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 d-grid gap-2 d-block">
+                  <button class="btn btn-lg btn-primary" id="judge-btn" type="button">担当色を見る！</button>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row mt-3">
+                <div id="tweet-moment-btn" class="col-6 d-grid gap-2 d-block">
+                  <a id="tweet-moment" href="" class="btn btn-info btn-sm" target="_blank" aria-disabled="false">
+                    <span id="tweet-moment-text">リンク1</span>
+                  </a>
+                </div>
+                <div id="seat-map-btn" class="col-6 d-grid gap-2 d-block">
+                  <a id="seat-map-link" href="" class="btn btn-secondary btn-sm"
+                    role="button" target="_blank">リンク2</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="modal-options" data-izimodal-title="モーダルタイトル">
+            <div class="liella-icon-container">
+              <img id="liella-img" class="target_liella" src="">
+            </div>
+            <h2 class="result" id="result"></h2>
+            <div id="ariake-arena-tips" class="ariake-arena-tips d-none">
+              <p>特殊な警告を入れる場合</p>
+              <!-- <img src="./img//ariake-arena-tips.png" alt="アリーナ席の皆様へ" width="100%">
+              <div class="container">
+                <h2 class="text-danger">アリーナ席の皆様へ</h2>
+                <p>
+                  本企画では上記図面に記載のブロック記号を使用しておりますが、ライブ当日はブロック配置や記号が
+                  異なる可能性がございます。
+                </p>
+                <p>
+                  ブロック配置や記号が異なる場合は、できる限りで構いませんので上記図面と似たような配色になるようにご対応いただけますと幸いです。
+                </p>
+              </div> -->
+            </div>
+            <!-- テスト中はTwitter機能無効化 -->
+            <div id="share-btn" class="d-flex justify-content-center my-3">
+              <a target="_blank" class="btn btn-primary mx-1" role="button" onclick="tw_share()">
+                <i class="fab fa-twitter"></i> <span>結果をツイート</span>
+              </a>
+              <!-- <a id="extra-button" target="_blank" class="btn btn-primary mx-1" role="button" href="">
+                <span class="extra-button-message"></span>
+              </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div id="illust-container" class="container mt-3 mb-auto mr-auto ml-auto">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

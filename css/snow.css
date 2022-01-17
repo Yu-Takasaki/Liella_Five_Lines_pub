@@ -1,0 +1,39 @@
+body > #snow-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.snow {
+  background-color: rgba(255, 255, 255, 0.794); /* 雪の色 */
+  border-radius: 50%;
+  border: 0.5px solid rgb(212, 212, 212);
+  position: absolute;
+  animation: animate-snow 10s linear;
+}
+
+/* ===== 雪のアニメーション ===== */
+@keyframes animate-snow {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    top: 100vh;
+  }
+}
+
+/* 参考サイト：https://web-dev.tech/front-end/javascript/snow-falling-effect/ */
